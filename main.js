@@ -11,6 +11,10 @@ var g_resources= [{
     name: "gripe_run_right",
     type: "image",
     src:  "data/gripe_run_right.png"
+},  {
+    name: "shroom",
+    type: "image",
+    src:  "data/shroom.png"
 }];
 
 // Player
@@ -29,7 +33,6 @@ var Player = me.ObjectEntity.extend({
         if(me.input.isKeyPressed('right'))  {
             this.flipX(false);
             this.vel.x += this.accel.x * me.timer.tick * ff;
-            console.log(this.pos);
         } else if (me.input.isKeyPressed('left')) {
             this.flipX(true);
             this.vel.x -= this.accel.x * me.timer.tick * ff;
@@ -42,11 +45,10 @@ var Player = me.ObjectEntity.extend({
             this.vel.y += this.accel.y * me.timer.tick * ff;
         } else { this.vel.y = 0; }
 
-        if (Math.random() < 0.001) {
-            this.flip = !this.flip;
-        }
         // check & update player movement
         this.updateMovement();
+
+        me.game.collide(this);
 
         // update animation if necessary
         if (this.vel.x!=0 || this.vel.y!=0) {
@@ -56,6 +58,19 @@ var Player = me.ObjectEntity.extend({
         }
         return false;
     }
+})
+
+var Shroom = me.CollectableEntity.extend({
+    init: function(x, y, settings) {
+        this.parent(x, y, settings);
+    },
+
+    onCollision: function(res, obj) {
+        obj.flip = !obj.flip;
+
+        this.pos.x = Math.random() * 1280;
+        this.pos.y = Math.random() * 640;
+    },
 })
 
 var jsApp    =
@@ -95,6 +110,7 @@ var jsApp    =
         me.state.set(me.state.PLAY, new PlayScreen());
 
         me.entityPool.add("player",Player);
+        me.entityPool.add("shroom",Shroom);
 
         me.input.bindKey(me.input.KEY.LEFT, "left");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
