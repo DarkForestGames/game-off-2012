@@ -28,5 +28,25 @@
    </properties>
   </object>
   <object x="414" y="299"/>
+  <object x="165" y="182"/>
+  <object x="189" y="204"/>
+  <object x="205" y="208"/>
+  <object x="205" y="208"/>
+  <object x="366" y="290"/>
+  <object x="355" y="278"/>
+  <object x="353" y="274"/>
+ </objectgroup>
+ <objectgroup name="stuff" width="20" height="20">
+  <object name="shroom" x="535" y="377" width="32" height="32">
+   <properties>
+    <property name="image" value="shroom"/>
+    <property name="spritewidth" value="16"/>
+   </properties>
+  </object>
+  <object x="380" y="277"/>
+  <object x="374" y="274"/>
+  <object x="367" y="278"/>
+  <object x="380" y="280"/>
+  <object x="361" y="247"/>
  </objectgroup>
 </map>
